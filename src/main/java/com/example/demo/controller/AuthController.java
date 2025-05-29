@@ -19,12 +19,10 @@ public class AuthController {
 
     @PostMapping("/register")
     public String registerUser(@ModelAttribute("userDto") UserRegistrationDto dto) {
-        // Проверка на существующего пользователя
         if (userRepository.findByUsername(dto.getUsername()).isPresent()) {
             return "redirect:/register?error=User already exists";
         }
 
-        // Создание нового пользователя
         User user = new User();
         user.setUsername(dto.getUsername());
         user.setPassword(passwordEncoder.encode(dto.getPassword())); // ШИФРОВАНИЕ ПАРОЛЯ

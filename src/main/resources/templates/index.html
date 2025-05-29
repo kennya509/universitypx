@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Університет - Головна</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            background-color: #343a40;
+            padding: 1rem;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar h1 {
+            margin: 0;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            background-color: #dc3545;
+            border-radius: 4px;
+        }
+        .navbar a:hover {
+            background-color: #c82333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .welcome-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        .user-info {
+            background-color: #e9ecef;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar">
+    <h1>Університетська система</h1>
+    <div>
+        <span sec:authentication="name">Студент</span>
+        <a th:href="@{/logout}">Выйти</a>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="welcome-card">
+        <h2>Ласкаво Просимо!</h2>
+
+        <div class="user-info">
+            <p><strong>Ви увійшли як:</strong> <span sec:authentication="name">Пользователь</span></p>
+            <p><strong>Ролі:</strong> <span sec:authentication="authorities">Роли</span></p>
+        </div>
+
+        <p>Ви успішно увійшли в Університетську систему.</p>
+
+        <div sec:authorize="hasRole('ADMIN')">
+            <h3>Панель Викладача</h3>
+            <p>У вас є права Викладача для управління системою.</p>
+        </div>
+
+        <div sec:authorize="hasRole('USER')">
+            <h3>Панель студента</h3>
+            <p>Ласкаво просимо у студентській панелі.</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
