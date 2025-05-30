@@ -25,7 +25,7 @@ public class AuthController {
 
         User user = new User();
         user.setUsername(dto.getUsername());
-        user.setPassword(passwordEncoder.encode(dto.getPassword())); // ШИФРОВАНИЕ ПАРОЛЯ
+        user.setPassword(passwordEncoder.encode(dto.getPassword()));
 
         userRepository.save(user);
 

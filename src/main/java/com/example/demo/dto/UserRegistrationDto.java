@@ -16,7 +16,6 @@ public class UserRegistrationDto {
     @NotBlank(message = "Подтверждение пароля обязательно")
     private String confirmPassword;
 
-    // Конструкторы
     public UserRegistrationDto() {}
 
     public UserRegistrationDto(String username, String password, String confirmPassword) {
@@ -25,7 +24,6 @@ public class UserRegistrationDto {
         this.confirmPassword = confirmPassword;
     }
 
-    // Геттеры и сеттеры
     public String getUsername() { return username; }
     public void setUsername(String username) { this.username = username; }
 
@@ -35,7 +33,6 @@ public class UserRegistrationDto {
     public String getConfirmPassword() { return confirmPassword; }
     public void setConfirmPassword(String confirmPassword) { this.confirmPassword = confirmPassword; }
 
-    // Валидация совпадения паролей
     public boolean isPasswordMatch() {
         return password != null && password.equals(confirmPassword);
     }
